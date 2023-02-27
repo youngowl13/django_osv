@@ -1,0 +1,14 @@
+jobs:
+  osv_scan:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install OSV scanner
+      run: |
+        curl -LO https://storage.googleapis.com/osv-website-us/downloads/osvutil-linux-amd64 && \
+        chmod +x osvutil-linux-amd64 && \
+        sudo mv osvutil-linux-amd64 /usr/local/bin/osvutil
+    - name: Run OSV scanner
+      run: |
+        osvutil scan .
