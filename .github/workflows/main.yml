@@ -1,14 +1,6 @@
-jobs:
-  osv_scan:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Install OSV scanner
-      run: |
-        curl -LO https://storage.googleapis.com/osv-website-us/downloads/osvutil-linux-amd64 && \
-        chmod +x osvutil-linux-amd64 && \
-        sudo mv osvutil-linux-amd64 /usr/local/bin/osvutil
-    - name: Run OSV scanner
-      run: |
-        osvutil scan .
+osv-scanner:
+  image: golang:1.19.4-alpine3.17
+  script:
+    - apk add git
+    - go install github.com/google/osv-scanner/cmd/osv-scanner@v1
+    - osv-scanner --version
