@@ -18,4 +18,4 @@ jobs:
       - name: Install OSV Scanner
         run: pip install osv
       - name: Run OSV Scanner
-        run: osv scan
+        run: pwd | osv-scanner
